@@ -1,5 +1,29 @@
 
 #include <stdio.h>
+#include <stdlib.h>
+#define MAX_SIZE 5
+
+
+
+
+//structures for data structures
+typedef struct{
+    int data[MAX_SIZE];
+    int index;
+}Array;
+
+typedef struct{
+    int data[MAX_SIZE];
+    int front;
+    int rear;
+}Queue;
+
+
+typedef struct{
+    int data[MAX_SIZE];
+    int top;
+}Stack;
+
 
 //functions for each data Structures
 void array();
@@ -8,10 +32,11 @@ void stack();
 
 
 //functions for array
-void insert();
+void insert(Array*);
 void delete();
 void display_index();
-
+void display(Array*);
+Array * create_array();
 
 //functions for queue
 void enqueue();
@@ -21,42 +46,22 @@ void dequeue();
 void pop();
 void push();
 
-//general functions
-void display();
 
 
 
-//structures for data structures
-typedef struct{
-    int ar[5];
-    int index;
-}Array;
-
-
-typedef struct{
-    int data[5];
-    int front;
-    int rear;
-}Queue;
-
-
-typedef struct{
-    int data[5];
-    int top;
-}Stack;
 
 
 int main()
 {
     int ch;
-    int ch1=1;
-    while(ch1)
+    int loop_is_on=1;
+    while(loop_is_on)
     {
         printf("Implementation of Data Structures \n\n\n");
-        printf("What do you want to create?\n1. Array\n2. Queue\n3. Stack\n");
+        printf("What do you want to create?\n1. Array\n2. Queue\n3. Stack\n->");
         scanf("%d",&ch);
         
-        ch1 = 0;
+        loop_is_on = 0;
         switch(ch)
         {
             case 1:
@@ -73,7 +78,7 @@ int main()
                 
             default:
                 printf("No such choice\n\n");
-                ch1=1;
+                loop_is_on=1;
         }
     }    
     
@@ -84,9 +89,17 @@ int main()
 
 void insert(Array *arr)
 {
-    int num;
-    printf("\n\nIn which index do you want to insert in? (0-4)\n");
-    scanf("%d",&num);
+    int ind,data_to_insert;
+    printf("\n\nIn which index do you want to insert in? (0-4)\n->");
+    scanf("%d",&ind);
+    if (ind > 4 || ind < 0){
+        printf("index should be between 0-4");
+        return; 
+    }
+    printf("Enter data to insert\n->");
+    scanf("%d",&data_to_insert);
+
+    arr->data[ind] = data_to_insert;
     return;
 }
     
@@ -95,8 +108,13 @@ void delete()
     return;
 }
 
-void display()
+void display(Array *arr)
 {
+    int i;
+    for(i=0;i<MAX_SIZE;i++)
+    {
+        printf("%d\t",arr->data[i]);
+    }
     return;
 }
 
@@ -107,35 +125,53 @@ void display_index()
 
 
 
-
+Array * create_array(){
+    int i,data_to_insert;
+    Array *arr = (Array*) malloc (sizeof(Array));
+    printf("\nInteger Array of size 5 is created \n");
+    for (i = 0;i<MAX_SIZE;i++)
+    {
+        printf("Enter data to insert\n->");
+        scanf("%d",&data_to_insert);
+        arr->data[i] = data_to_insert;
+    }
+    return arr;
+}
 void array()
 {
+    Array *arr = create_array();
     int choice;
-    Array *arr; 
-    //arr = (Array*) malloc (sizeof(Array));
-    printf("\n\n\nWhat do you want to do?\n1.Insert\n2.Delete\n3.Display\n4.Display a value from index\n5.End\n");
-    scanf("%d",&choice);
-    switch(choice)
+    int loop_is_on = 1;
+    
+    while(loop_is_on)
     {
-        case 1:
-            insert(arr);
-            break;
-            
-        case 2:
-            delete();
-            break;
-            
-        case 3:
-            display();
-            break;
-            
-        case 4:
-            display_index();
-            break;
-            
-        default:
-            printf("Wrong input\n\n");
+        printf("\n\n\nWhat do you want to do?\n1.Insert\n2.Delete\n3.Display\n4.Display a value from index\n5.End\n->");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:
+                insert(arr);
+                break;
+                
+            case 2:
+                delete();
+                break;
+                
+            case 3:
+                display(arr);
+                break;
+                
+            case 4:
+                display_index();
+                break;
+                
 
+            case 5:
+                loop_is_on = 0;
+                break;
+            default:
+                printf("Wrong input\n\n");
+        }
     }
 }
 
