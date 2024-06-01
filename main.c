@@ -43,7 +43,6 @@ typedef struct{
 typedef struct{
     int data[5];
     int top;
-    int bottom;
 }Stack;
 
 
@@ -65,15 +64,15 @@ int main()
                 break;
             
             case 2:
-                queue();
+                //queue();
                 break;
                 
             case 3:
-                stack();
+                //stack();
                 break;
                 
             default:
-                printf("Wrong input\n\n");
+                printf("No such choice\n\n");
                 ch1=1;
         }
     }    
@@ -83,10 +82,11 @@ int main()
 
 //In Array functions
 
-void insert()
+void insert(Array *arr)
 {
+    int num;
     printf("\n\nIn which index do you want to insert in? (0-4)\n");
-    scanf("%d",&);
+    scanf("%d",&num);
     return;
 }
     
@@ -111,12 +111,14 @@ void display_index()
 void array()
 {
     int choice;
+    Array *arr; 
+    //arr = (Array*) malloc (sizeof(Array));
     printf("\n\n\nWhat do you want to do?\n1.Insert\n2.Delete\n3.Display\n4.Display a value from index\n5.End\n");
     scanf("%d",&choice);
     switch(choice)
     {
         case 1:
-            insert();
+            insert(arr);
             break;
             
         case 2:

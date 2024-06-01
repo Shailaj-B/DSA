@@ -1,10 +1,19 @@
 #include <stdio.h>
 
-int main()
-{
-    int a[2] = {0};
-    printf("%d    %d",a[0],a[1]);
-    // comment to check version history
-    //changes made 
+
+void check();
+void check2();
+int main(){
+    check();
+    
+
+
     return 0;
+}
+
+void check(){
+    check2();
+}
+void check2(){
+    printf("hello");
 }
