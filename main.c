@@ -34,9 +34,10 @@ void stack();
 //functions for array
 void insert(Array*);
 void delete(Array*);
-void display_index();
+void display_index(Array*);
 void display(Array*);
 Array * create_array();
+void reset(Array*);
 
 //functions for queue
 void enqueue();
@@ -87,7 +88,8 @@ int main()
 
 //In Array functions
 
-Array * create_array(){
+Array * create_array()
+{
     int i,data_to_insert;
     Array *arr = (Array*) malloc (sizeof(Array));
     printf("\nInteger Array of size 5 is created \n");
@@ -142,12 +144,24 @@ void display(Array *arr)
     return;
 }
 
-void display_index()
+void display_index(Array *arr)
 {
+    int ind;
+    printf("Choose an index to display the data from\n->");
+    scanf("%d",&ind);
+    printf("\n%d",arr->data[ind]);
     return;
 }
 
-
+void reset(Array *arr)
+{
+    int i;
+    for(i=0;i<MAX_SIZE;i++)
+    {
+        arr->data[i]=0;
+    }
+    printf("Array has been reset");
+}
 
 void array()
 {
@@ -157,7 +171,7 @@ void array()
     
     while(loop_is_on)
     {
-        printf("\n\n\nWhat do you want to do?\n1.Insert\n2.Delete\n3.Display\n4.Display a value from index\n5.End\n->");
+        printf("\n\n\nWhat do you want to do?\n1.Insert\n2.Delete\n3.Display\n4.Display a value from index\n5.Reset array\n6.End\n->");
         scanf("%d",&choice);
         switch(choice)
         {
@@ -174,15 +188,19 @@ void array()
                 break;
                 
             case 4:
-                display_index();
+                display_index(arr);
                 break;
                 
-
             case 5:
+                reset(arr);
+                break;
+
+            case 6:
                 loop_is_on = 0;
                 break;
+
             default:
-                printf("Wrong input\n\n");
+                printf("No such choice\n\n");
         }
     }
 }
