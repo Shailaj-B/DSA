@@ -33,7 +33,7 @@ void stack();
 
 //functions for array
 void insert(Array*);
-void delete();
+void delete(Array*);
 void display_index();
 void display(Array*);
 Array * create_array();
@@ -87,6 +87,20 @@ int main()
 
 //In Array functions
 
+Array * create_array(){
+    int i,data_to_insert;
+    Array *arr = (Array*) malloc (sizeof(Array));
+    printf("\nInteger Array of size 5 is created \n");
+    printf("Enter data to insert\n->");
+    for (i = 0;i<MAX_SIZE;i++)
+    {
+        scanf("%d",&data_to_insert);
+        arr->data[i] = data_to_insert;
+    }
+    return arr;
+}
+
+
 void insert(Array *arr)
 {
     int ind,data_to_insert;
@@ -103,8 +117,18 @@ void insert(Array *arr)
     return;
 }
     
-void delete()
+void delete(Array *arr)
 {
+    int ind;
+
+    printf("Choose an index to delete the data from\n->");
+    scanf("%d",&ind);
+    if (ind > 4 || ind < 0){
+        printf("index should be between 0-4");
+        return; 
+    }
+    arr->data[ind] = 0;
+    printf("Data from %d is deleted\n",ind);
     return;
 }
 
@@ -125,18 +149,6 @@ void display_index()
 
 
 
-Array * create_array(){
-    int i,data_to_insert;
-    Array *arr = (Array*) malloc (sizeof(Array));
-    printf("\nInteger Array of size 5 is created \n");
-    for (i = 0;i<MAX_SIZE;i++)
-    {
-        printf("Enter data to insert\n->");
-        scanf("%d",&data_to_insert);
-        arr->data[i] = data_to_insert;
-    }
-    return arr;
-}
 void array()
 {
     Array *arr = create_array();
@@ -154,7 +166,7 @@ void array()
                 break;
                 
             case 2:
-                delete();
+                delete(arr);
                 break;
                 
             case 3:
