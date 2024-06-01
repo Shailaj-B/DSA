@@ -44,8 +44,9 @@ void enqueue();
 void dequeue();
 
 //functions for stack
-void pop();
-void push();
+void pop(Stack*);
+void push(Stack*);
+void display_stack(Stack*);
 
 
 
@@ -74,7 +75,7 @@ int main()
                 break;
                 
             case 3:
-                //stack();
+                stack();
                 break;
                 
             default:
@@ -210,7 +211,80 @@ void queue()
     return;
 }
 
+
+
+
+
+
+void pop(Stack *stk)
+{
+    int popped_data;
+    if (stk->top == 0)
+    {
+        printf("No data to pop\n");
+        return;
+    }
+    stk->top--;
+    popped_data = stk->data[stk->top];
+    printf("%d has been popped\n",popped_data);
+    return;
+}
+
+void push(Stack *stk)
+{
+    int data_to_push;
+    if(stk->top == MAX_SIZE-1)
+    {
+        printf("\nStack is full\n");
+        return;
+    }
+    printf("Enter a data to push\n->");
+    scanf("%d",&data_to_push);
+    stk->data[stk->top]=data_to_push;
+    stk->top++;
+}
+
+void display_stack(Stack *stk)
+{
+    int i;
+    for(i = 0; i < stk->top; i ++)
+    {
+        printf("%d\t",stk->data[i]);
+    }
+}
+
 void stack()
 {
+    Stack *stk;
+    stk->top=0;
+    int choice;
+    int loop_is_on = 1;
+    while(loop_is_on)
+    {
+        printf("\nWhat do you want to do?\n1.Pop\n2.Push\n3.Display\n4.End\n->");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:
+            pop(stk);
+            break;
+
+            case 2:
+            push(stk);
+            break;
+
+            case 3:
+            display_stack(stk);
+            break;
+
+            case 4:
+            loop_is_on = 0;
+            break;
+
+            default:
+            printf("No such choice\n");        
+        }
+    }
+
     return;
 }

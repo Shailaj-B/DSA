@@ -1,0 +1,19 @@
+stack
+
+make stack
+    top = 0
+
+provide options
+    pop
+        if top = 0 underflow
+        remove data from top
+        decrease top
+        
+    push
+        if top = max_size-1 overflow
+        give data
+        add to top
+        increase top
+    
+    display
+        display all data
