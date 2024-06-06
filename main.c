@@ -216,15 +216,15 @@ void array()
 void enqueue(Queue *que)
 {
     int data_to_queue;
-    if(que->front >= MAX_SIZE)
+    if(que->rear > MAX_SIZE)
     {
         printf("Queue is full\n");
         return;
     }
     printf("Enter the data\n->");
     scanf("%d",&data_to_queue);
-    que->data[que->front] = data_to_queue;
-    que->front++;
+    que->data[que->rear] = data_to_queue;
+    que->rear++;
 }
 
 int dequeue(Queue* que)
@@ -235,8 +235,8 @@ int dequeue(Queue* que)
         printf("No data to dequeue\n");
         return 0;
     }
-    dequeued_item = que->data[que->rear];
-    que->rear++;
+    dequeued_item = que->data[que->front];
+    que->front++;
     return dequeued_item;
 
 }
@@ -244,9 +244,9 @@ int dequeue(Queue* que)
 void display_queue(Queue *que)
 {
     int i;
-    for(i = que->rear; i < que->front; i ++)
+    for(i = que->front; i < que->rear; i ++)
     {
-        printf("%d\t",que->data[que->rear]);
+        printf("%d\t",que->data[i]);
     }    
     return;
 }
@@ -256,7 +256,7 @@ void display_queue(Queue *que)
 
 void queue()
 {
-    Queue *que;
+    Queue *que = (Queue*)malloc(sizeof(Queue));
     que->front = 0;
     que->rear = 0;
     int loop_is_on = 1;
@@ -265,7 +265,7 @@ void queue()
     while(loop_is_on)
     {
         printf("\nWhat do you want to do\n1.Enqueue\n2.Dequeue\n3.Display\n4.End\n->");
-        scanf("%d\n",&choice);
+        scanf("%d",&choice);
         switch(choice)
         {
             case 1:
