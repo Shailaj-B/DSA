@@ -42,10 +42,11 @@ void reset(Array*);
 //functions for queue
 void enqueue();
 void dequeue();
+void display_queue();
 
 //functions for stack
-void pop(Stack*);
 void push(Stack*);
+int pop(Stack*);
 void display_stack(Stack*);
 
 
@@ -71,7 +72,7 @@ int main()
                 break;
             
             case 2:
-                //queue();
+                queue();
                 break;
                 
             case 3:
@@ -206,29 +207,54 @@ void array()
     }
 }
 
+
+
+
+
+//Queue functions
+
 void queue()
 {
-    return;
-}
-
-
-
-
-
-
-void pop(Stack *stk)
-{
-    int popped_data;
-    if (stk->top == 0)
+    Queue *que;
+    int loop_is_on = 1;
+    int choice;
+    /*while(loop_is_on)
     {
-        printf("No data to pop\n");
-        return;
+        printf("\nWhat do you want to do\n1.Enqueue\n2.Dequeue\n3.Display\n4End\n");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:
+            enqueue();
+            break;
+
+            case 2:
+            dequeue();
+            break;
+
+            case 3:
+            display_queue();
+            break;
+
+            case 4:
+            loop_is_on = 0;
+            break;
+
+            default:
+            printf("No such choice");
+        }
     }
-    stk->top--;
-    popped_data = stk->data[stk->top];
-    printf("%d has been popped\n",popped_data);
     return;
+*/
 }
+
+
+
+
+
+
+
+//Stack functions
 
 void push(Stack *stk)
 {
@@ -242,6 +268,19 @@ void push(Stack *stk)
     scanf("%d",&data_to_push);
     stk->data[stk->top]=data_to_push;
     stk->top++;
+}
+
+int pop(Stack *stk)
+{
+    int popped_data;
+    if (stk->top == 0)
+    {
+        printf("No data to pop\n");
+        return 0;
+    }
+    stk->top--;
+    popped_data = stk->data[stk->top];
+    return popped_data;
 }
 
 void display_stack(Stack *stk)
@@ -259,18 +298,22 @@ void stack()
     stk->top=0;
     int choice;
     int loop_is_on = 1;
+    int call_popped_data;
     while(loop_is_on)
     {
-        printf("\nWhat do you want to do?\n1.Pop\n2.Push\n3.Display\n4.End\n->");
+        printf("\nWhat do you want to do?\n1.Push\n2.Pop\n3.Display\n4.End\n->");
         scanf("%d",&choice);
         switch(choice)
         {
             case 1:
-            pop(stk);
+            push(stk);
             break;
 
             case 2:
-            push(stk);
+            call_popped_data = pop(stk);
+            if(call_popped_data == 0)
+                break;
+            printf("%d has been popped",call_popped_data);
             break;
 
             case 3:

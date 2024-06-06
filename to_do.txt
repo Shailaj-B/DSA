@@ -17,3 +17,26 @@ provide options
     
     display
         display all data
+
+
+
+
+
+queue
+
+    make queue
+        rear = 0
+        front = 0
+        
+        when rear = front => reset
+    give options to user
+        enqueue
+            if rear >= max_size
+            input data
+            add to rear
+            rear increase
+
+        dequeue
+            if front = rear
+            remove data fron front
+            front increase
