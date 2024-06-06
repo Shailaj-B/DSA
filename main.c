@@ -40,9 +40,9 @@ Array * create_array();
 void reset(Array*);
 
 //functions for queue
-void enqueue();
-void dequeue();
-void display_queue();
+void enqueue(Queue*);
+int dequeue(Queue*);
+void display_queue(Queue*);
 
 //functions for stack
 void push(Stack*);
@@ -56,16 +56,16 @@ void display_stack(Stack*);
 
 int main()
 {
-    int ch;
+    int choice;
     int loop_is_on=1;
     while(loop_is_on)
     {
         printf("Implementation of Data Structures \n\n\n");
         printf("What do you want to create?\n1. Array\n2. Queue\n3. Stack\n->");
-        scanf("%d",&ch);
+        scanf("%d",&choice);
         
         loop_is_on = 0;
-        switch(ch)
+        switch(choice)
         {
             case 1:
                 array();
@@ -213,27 +213,74 @@ void array()
 
 //Queue functions
 
+void enqueue(Queue *que)
+{
+    int data_to_queue;
+    if(que->front >= MAX_SIZE)
+    {
+        printf("Queue is full\n");
+        return;
+    }
+    printf("Enter the data\n->");
+    scanf("%d",&data_to_queue);
+    que->data[que->front] = data_to_queue;
+    que->front++;
+}
+
+int dequeue(Queue* que)
+{
+    int dequeued_item;
+    if (que->rear == que->front)
+    {
+        printf("No data to dequeue\n");
+        return 0;
+    }
+    dequeued_item = que->data[que->rear];
+    que->rear++;
+    return dequeued_item;
+
+}
+
+void display_queue(Queue *que)
+{
+    int i;
+    for(i = que->rear; i < que->front; i ++)
+    {
+        printf("%d\t",que->data[que->rear]);
+    }    
+    return;
+}
+
+
+
+
 void queue()
 {
     Queue *que;
+    que->front = 0;
+    que->rear = 0;
     int loop_is_on = 1;
     int choice;
-    /*while(loop_is_on)
+    int call_dequeued_item;
+    while(loop_is_on)
     {
-        printf("\nWhat do you want to do\n1.Enqueue\n2.Dequeue\n3.Display\n4End\n");
-        scanf("%d",&choice);
+        printf("\nWhat do you want to do\n1.Enqueue\n2.Dequeue\n3.Display\n4.End\n->");
+        scanf("%d\n",&choice);
         switch(choice)
         {
             case 1:
-            enqueue();
+            enqueue(que);
             break;
 
             case 2:
-            dequeue();
+            call_dequeued_item = dequeue(que);
+            if (call_dequeued_item == 0)
+                break;
+            printf("%d has been dequeued\n",call_dequeued_item);
             break;
 
             case 3:
-            display_queue();
+            display_queue(que);
             break;
 
             case 4:
@@ -245,7 +292,6 @@ void queue()
         }
     }
     return;
-*/
 }
 
 
